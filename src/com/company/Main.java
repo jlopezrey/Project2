@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (true){
 
@@ -17,27 +17,19 @@ public class Main {
 
             switch (userChoice){
                 case 1:
-                    System.out.println("Please describe a task");
-                    String a = input.nextLine();
-                    addPriority(Priority,i);
-                    addTask(tasks,a);
+                    addTask(tasks);
                     break;
                 case 2:
-                    System.out.println("Please enter the number for what task you would like deleted.");
-                    listTask(tasks);
-                    int i = input.nextInt();
-                    deleteTask(tasks,i);
+                    deleteTask(tasks);
                     break;
                 case 3:
-                    System.out.println("Please enter the number for what task you would like updated");
-                    i = input.nextInt();
-                    input.nextLine();
-                    System.out.println("Please enter the new task description");
-                    a = input.nextLine();
-                    updateTask(tasks,i,a);
+                    updateTask(tasks);
                     break;
                 case 4:
                     listTask(tasks);
+                    break;
+                case 5:
+                    listByPriority(tasks);
                     break;
                 case 0:
                     endProgram();
@@ -62,27 +54,70 @@ public class Main {
         System.out.println("(2) Remove a task");
         System.out.println("(3) Update a task");
         System.out.println("(4) List all tasks");
+        System.out.println("(5) List all by priority");
         System.out.println("(0) Exit");
     }
-    private static void deleteTask(ArrayList<String> tasks, int index) {
-        tasks.remove(index);
+    private static ArrayList<Task> deleteTask(ArrayList<Task> tasks) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the number for what task you would like deleted.");
+        listTask(tasks);
+        int i = input.nextInt();
+        tasks.remove(i);
+        return tasks;
     }
 
-    private static void updateTask(ArrayList<String> tasks, int index, String desc) {
-        tasks.set(index, desc);
+    private static ArrayList<Task> updateTask(ArrayList<Task> tasks) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("What task would you like to update?");
+        int update = input.nextInt();
+        input.nextLine();
+        System.out.println("Please name a task");
+        String name = input.nextLine();
+        System.out.println("Please describe a task");
+        String description = input.nextLine();
+        System.out.println("Please give the task a priority from (0-5)");
+        int priority = input.nextInt();
+        input.nextLine();
+        Task a = new Task(name, description, priority);
+        tasks.set(update, a);
+        return tasks;
     }
 
-    private static void listTask(ArrayList<String> tasks) {
+    private static void listTask(ArrayList<Task> tasks) {
         for (int i = 0; i <tasks.size(); i++){
             System.out.println(i + ": " + tasks.get(i));
         }
     }
 
-    private static void addTask(ArrayList<String> tasks, String desc) {
-        tasks.add(desc);
+    private static ArrayList<Task> addTask(ArrayList<Task> tasks) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please name a task");
+        String name = input.nextLine();
+        System.out.println("Please describe a task");
+        String description = input.nextLine();
+        System.out.println("Please give the task a priority from (0-5)");
+        int priority = input.nextInt();
+        input.nextLine();
+        Task a = new Task(name, description, priority);
+        tasks.add(a);
+        return tasks;
     }
-    private static void addPriority(ArrayList<String> tasks, String desc) {
-        tasks.add(desc);
+
+    private static void listByPriority(ArrayList<Task> tasks) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("What priority would you like to view?");
+        int priority = input.nextInt();
+        input.nextLine();
+
+
+        //tasks.add(desc);
+
+        for(int i = 0; i < tasks.size();i++){
+            if(priority==tasks.get(i).getPriority()){
+                System.out.println(tasks.get(i));
+            }
+        }
+
     }
 
 
