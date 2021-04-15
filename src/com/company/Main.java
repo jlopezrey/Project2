@@ -1,7 +1,19 @@
 package com.company;
 
+//Collections.sort
+// comparable interface in public
+// public class has not the override method when making a new class
+// object to task
+// compare one task to another
+// priority or the name
+//@override
+//public compare int compare to
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+
+
 
 public class Main {
 
@@ -82,8 +94,9 @@ public class Main {
         tasks.set(update, a);
         return tasks;
     }
-
+//Collections.comparable goes here
     private static void listTask(ArrayList<Task> tasks) {
+        Collections.sort(tasks);
         for (int i = 0; i <tasks.size(); i++){
             System.out.println(i + ": " + tasks.get(i));
         }
@@ -103,6 +116,8 @@ public class Main {
         return tasks;
     }
 
+
+
     private static void listByPriority(ArrayList<Task> tasks) {
         Scanner input = new Scanner(System.in);
         System.out.println("What priority would you like to view?");
@@ -117,6 +132,8 @@ public class Main {
                 System.out.println(tasks.get(i));
             }
         }
+
+
 
     }
 

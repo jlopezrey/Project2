@@ -1,6 +1,7 @@
 package com.company;
 
-public class Task {
+public class Task implements Comparable<Task>{
+
     private String name;
     private String description;
     private int priority;
@@ -45,5 +46,11 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", priority=" + priority +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        int compare2Result=this.name.compareTo(other.name);
+        return compare2Result;
     }
 }
